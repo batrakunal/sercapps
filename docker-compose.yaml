@@ -1,0 +1,41 @@
+version: "3"
+services:
+
+    sercnav:
+        image: batrakunal/sercnav:latest
+        container_name: sercnav
+        restart: always
+
+    systemitool:
+        image: batrakunal/systemitool:latest
+        container_name: systemitool
+        restart: always
+        volumes:
+            - ./000-default.conf:/etc/apache2/sites-enabled/000-default.conf
+    backend:
+        image: batrakunal/sercbackend:test
+        container_name: backend
+        restart: always
+
+    prodbackend:
+        image: batrakunal/sercbackend:latest
+        container_name: prodbackend
+        restart: always
+
+    wwd:
+        image: batrakunal/wwd:latest
+        container_name: wwd
+        restart: always
+
+    nginx:
+        image: nginx:latest
+        container_name: nginx
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf
+        depends_on:
+            - sercnav
+            - wwd
+            - systemitool
