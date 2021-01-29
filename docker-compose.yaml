@@ -26,6 +26,12 @@ services:
         image: batrakunal/wwd:latest
         container_name: wwd
         restart: always
+    
+    airc:
+        image: batrakunal/airc_web:latest
+        container_name: airc_web
+        restart: always
+        
 
     nginx:
         image: nginx:latest
@@ -39,3 +45,6 @@ services:
             - sercnav
             - wwd
             - systemitool
+            - backend
+            - prodbackend
+            - airc
