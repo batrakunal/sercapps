@@ -5,22 +5,30 @@ services:
         image: batrakunal/sercnav:latest
         container_name: sercnav
         restart: always
+        ports:
+         - "8000:80"
 
     systemitool:
         image: batrakunal/systemitool:latest
         container_name: systemitool
         restart: always
+        ports:
+         - "8001:80"
         volumes:
             - ./000-default.conf:/etc/apache2/sites-enabled/000-default.conf
     backend:
         image: batrakunal/sercbackend:test
         container_name: backend
         restart: always
+        ports:
+         - "8081:8000"
 
     prodbackend:
         image: batrakunal/sercbackend:latest
         container_name: prodbackend
         restart: always
+        ports:
+         - "8080:8000"
 
 #    wwd:
 #        image: batrakunal/wwd:latest
